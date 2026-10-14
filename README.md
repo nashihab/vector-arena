@@ -1,4 +1,4 @@
-# VECTOR//ARENA — Browser FPS
+# VECTOR ARENA - Browser FPS
 
 A stylized, real-time multiplayer first-person arena shooter built with Three.js, Vite, Node.js, Express, and Socket.IO. The visual direction is a dark industrial training yard with cyan/amber lighting, clean tactical HUD elements, and non-graphic combat.
 
