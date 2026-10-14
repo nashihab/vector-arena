@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#080c12" />
+    <meta name="description" content="VECTOR//ARENA — a browser-based real-time first-person arena shooter." />
+    <title>VECTOR//ARENA — Online FPS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <canvas id="gameCanvas" tabindex="0" aria-label="VECTOR Arena first-person shooter"></canvas>
+      <div class="screen-vignette" aria-hidden="true"></div>
+      <div class="scanlines" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <div class="brand-lockup"><div class="brand-mark"><span></span><span></span><span></span></div><div><div class="brand-name">VECTOR<span>//</span>ARENA</div><div class="brand-subtitle">COMBAT SIMULATION / 07</div></div></div>
+        <div class="topbar-right"><div id="connectionStatus" class="connection-pill"><span class="status-dot"></span><span>CONNECTING</span></div><div class="online-pill"><span class="online-dot"></span><strong id="playerCount">0</strong><span>OPERATORS</span></div></div>
+      </header>
+
+      <div class="match-label"><span class="match-index">01</span><div><strong>FREE FOR ALL</strong><small>ORBITAL TRAINING YARD</small></div><span class="match-live"><i></i> LIVE</span></div>
+
+      <aside class="leaderboard glass-panel"><div class="panel-heading"><div><span class="eyebrow">CURRENT MATCH</span><h2>ELIMINATIONS</h2></div><span class="panel-symbol">↗</span></div><ol id="leaderboardList"><li class="empty-leaderboard">Waiting for operators…</li></ol><div class="panel-footer"><span class="tiny-dot"></span> SERVER AUTHORITATIVE</div></aside>
+
+      <div class="crosshair" id="crosshair" aria-hidden="true"><span class="ch-top"></span><span class="ch-right"></span><span class="ch-bottom"></span><span class="ch-left"></span><span class="ch-center"></span></div>
+      <div id="hitmarker" class="hitmarker" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div id="damageFlash" class="damage-flash" aria-hidden="true"></div>
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      <div id="announcement" class="announcement" role="status" aria-live="polite"></div>
+      <div id="killFeed" class="kill-feed" aria-label="Recent eliminations"></div>
+
+      <div class="bottom-hud">
+        <section class="status-module health-module"><div class="module-kicker"><span>VITALS</span><span id="healthLabel">100%</span></div><div class="health-number"><strong id="healthValue">100</strong><span>HP</span></div><div class="bar-track"><div id="healthBar" class="health-fill"></div></div><div class="module-caption" id="healthStatus">COMBAT READY</div></section>
+        <div class="bottom-center"><div id="roundMessage" class="round-message">CLICK TO DEPLOY</div><div class="controls-strip"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>MOVE</span><kbd>LMB</kbd><span>FIRE</span><kbd>SHIFT</kbd><span>SPRINT</span><kbd>R</kbd><span>RELOAD</span></div></div>
+        <section class="status-module ammo-module"><div class="module-kicker"><span>PRIMARY / AR-9</span><span id="ammoState">READY</span></div><div class="ammo-line"><strong id="ammoValue">30</strong><span class="ammo-divider">/</span><span id="reserveValue">120</span></div><div class="ammo-bottom"><span id="reloadHint">R — RELOAD</span><span class="weapon-type">5.56 × 45</span></div></section>
+      </div>
+
+      <div class="interaction-hint" id="interactionHint"><span class="mouse-icon">⌖</span><span>Click arena to capture mouse</span><span class="hint-divider"></span><kbd>ESC</kbd><span>release</span></div>
+
+      <section id="welcomeScreen" class="welcome-screen">
+        <div class="welcome-backdrop"></div><div class="welcome-card">
+          <div class="welcome-topline"><span class="brand-chip"><span class="brand-mark small"><i></i><i></i><i></i></span> VECTOR SYSTEMS</span><span class="build-label">BUILD 0.7.4 / WEB</span></div>
+          <div class="hero-layout"><div class="hero-copy"><div class="welcome-kicker"><span class="kicker-line"></span> MULTIPLAYER COMBAT SIMULATION</div><h1>OWN THE<br /><em>ANGLE.</em></h1><p>Enter a live arena. Outmaneuver rival operators. Make every shot count.</p><div class="hero-stats"><div><strong>24</strong><span>MAX OPERATORS</span></div><div><strong>3</strong><span>SHOTS TO ELIM</span></div><div><strong>∞</strong><span>REMATCHES</span></div></div></div><div class="hero-art" aria-hidden="true"><div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div><div class="hero-reticle"></div><div class="hero-slab slab-one"></div><div class="hero-slab slab-two"></div><div class="hero-slab slab-three"></div><div class="hero-core"><span>V</span></div><div class="hero-art-caption">TACTICAL ENVIRONMENT<br /><b>SECTOR 04 / ORBITAL YARD</b></div></div></div>
+          <form id="joinForm" class="join-form"><label for="nameInput">OPERATOR CALLSIGN</label><div class="join-row"><div class="name-input-wrap"><span class="input-prefix">ID //</span><input id="nameInput" name="name" maxlength="16" autocomplete="nickname" value="Rookie" placeholder="Enter callsign" /></div><button class="play-button" type="submit"><span>DEPLOY</span><span class="button-arrow">↗</span></button></div></form>
+          <div class="welcome-bottom"><div class="welcome-perks"><span><i></i> REAL-TIME MULTIPLAYER</span><span><i></i> SERVER-SIDE HIT VALIDATION</span><span><i></i> NO DOWNLOAD REQUIRED</span></div><span class="welcome-footnote">DESKTOP RECOMMENDED / HEADPHONES OPTIONAL</span></div>
+        </div>
+      </section>
+
+      <div id="gameFullScreen" class="modal-screen hidden"><div class="modal-card"><div class="modal-eyebrow">DEPLOYMENT DENIED</div><h2>ARENA AT CAPACITY</h2><p>All operator slots are occupied. Try again in a moment.</p><button id="retryButton" class="play-button" type="button">RETRY CONNECTION <span class="button-arrow">↗</span></button></div></div>
+      <div id="pauseScreen" class="pause-screen hidden"><div class="pause-card"><span class="eyebrow">SESSION PAUSED</span><h2>YOU'RE OUT OF THE ACTION.</h2><p>Click back into the arena to resume. Keep your eyes up.</p><button id="resumeButton" class="play-button" type="button">RETURN TO MATCH <span class="button-arrow">↗</span></button></div></div>
+      <div class="mobile-warning"><strong>DESKTOP CONTROLS RECOMMENDED</strong><span>VECTOR//ARENA is tuned for keyboard + mouse.</span></div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
